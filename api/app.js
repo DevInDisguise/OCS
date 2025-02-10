@@ -68,8 +68,13 @@ app.get("/data", async (req, res) => {
 
 // Fallback route for serving the index.html file
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  if (req.path.startsWith("/api")) {
+    res.status(404).json({ error: "API route not found" });
+  } else {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  }
 });
+
 
 const port = 3000;
 app.listen(port, () => {
