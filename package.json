@@ -1,21 +1,19 @@
 {
-  "name": "ocs",
+  "name": "vercel-deployment",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node api/app.js"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@supabase/supabase-js": "^2.48.1",
-    "@tailwindcss/postcss": "^4.0.5",
+    "express": "^4.18.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
     "md5": "^2.3.0",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.5"
+    "@supabase/supabase-js": "^2.0.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.7",
+    "postcss": "^8.4.20",
+    "autoprefixer": "^10.4.14"
   }
 }
