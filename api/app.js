@@ -5,20 +5,16 @@ const md5 = require("md5");
 const cors = require("cors");
 const path = require("path");
 
-// Initialize Express app
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Supabase configuration
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Route: Authentication
 app.post("/auth", async (req, res) => {
   const { userID, password } = req.body;
 
@@ -44,7 +40,6 @@ app.post("/auth", async (req, res) => {
   }
 });
 
-// Route: Fetch Data
 app.get("/data", async (req, res) => {
   const { userID, role } = req.query;
 
@@ -66,9 +61,7 @@ app.get("/data", async (req, res) => {
   }
 });
 
-// Fallback route for serving the index.html file
 app.get("*", (req, res) => {
-  // If the request is for an API or static file, let the above middleware handle it
   if (req.path.startsWith("/api") || req.path.includes(".")) {
     res.status(404).send("Not found");
   } else {
