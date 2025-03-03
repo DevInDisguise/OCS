@@ -1,8 +1,7 @@
 document.getElementById("loginForm").addEventListener("submit", async function (event) {
         event.preventDefault();
         const userID = document.getElementById("userID").value;
-        document.getElementById("password").value = md5(document.getElementById("password").value);
-        const password = (document.getElementById("password").value);        
+        const password = md5(document.getElementById("password").value);        
         const responseElement = document.getElementById("response");
         const form = document.getElementById("form");
         const result = document.getElementById("result");
