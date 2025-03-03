@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
-const md5 = require("md5");
 const path = require("path");
 
 const app = express();
@@ -16,14 +15,13 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 app.post("/auth", async (req, res) => {
   const { userID, password } = req.body;
 
-  const password_hash = md5(password);
 
   try {
     const { data, error } = await supabase
       .from("users")
       .select("role")
       .eq("userid", userID)
-      .eq("password_hash", password_hash);
+      .eq("password_hash", password);
 
     if (error) throw error;
 

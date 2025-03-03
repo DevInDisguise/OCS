@@ -1,9 +1,13 @@
+console.log(typeof md5); // Should print "function" if js-md5 is loaded
+
 document
     .getElementById("loginForm")
     .addEventListener("submit", async function (event) {
         event.preventDefault();
         const userID = document.getElementById("userID").value;
-        const password = document.getElementById("password").value;
+        const password = md5(document.getElementById("password").value);
+        console.log(password);
+        
         const responseElement = document.getElementById("response");
         const form = document.getElementById("form");
         const result = document.getElementById("result");
