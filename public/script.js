@@ -1,36 +1,38 @@
-document.getElementById("loginForm").addEventListener("submit", async function (event) {
-    event.preventDefault();
-    const userID = document.getElementById("userID").value;
-    const password = document.getElementById("password").value;
-    const responseElement = document.getElementById("response");
-    const form = document.getElementById("form");
-    const result = document.getElementById("result");
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const userID = document.getElementById("userID").value;
+        const password = document.getElementById("password").value;
+        const responseElement = document.getElementById("response");
+        const form = document.getElementById("form");
+        const result = document.getElementById("result");
 
-    responseElement.classList.add("text-blue-500");
-    responseElement.classList.remove("hidden");
-    responseElement.textContent = "Logging in...";
+        responseElement.classList.add("text-blue-500");
+        responseElement.classList.remove("hidden");
+        responseElement.textContent = "Logging in...";
 
-    try {
-        const response = await fetch("/auth", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userID, password }),
-        });
+        try {
+            const response = await fetch("/auth", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userID, password }),
+            });
 
-        const data = await response.json();
-        if (response.ok) {
-            form.classList.add("hidden");
-            result.classList.remove("hidden");
-            dataResult(userID, data.role);
-        } else {
-            responseElement.textContent = `Error: ${data.error}`;
+            const data = await response.json();
+            if (response.ok) {
+                form.classList.add("hidden");
+                result.classList.remove("hidden");
+                dataResult(userID, data.role);
+            } else {
+                responseElement.textContent = `Error: ${data.error}`;
+                responseElement.classList.add("text-red-500");
+            }
+        } catch (err) {
+            responseElement.textContent = `Error: ${err.message}`;
             responseElement.classList.add("text-red-500");
         }
-    } catch (err) {
-        responseElement.textContent = `Error: ${err.message}`;
-        responseElement.classList.add("text-red-500");
-    }
-});
+    });
 
 async function dataResult(userID, role) {
     const dataResponse = document.getElementById("dataResponse");
